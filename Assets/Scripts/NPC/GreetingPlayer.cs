@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using static AnimationHashes;
 
-public class Greeting : MonoBehaviour
+public class GreetingPlayer : MonoBehaviour
 {
-    Animator animator;
-    int hashGreeting = Animator.StringToHash("greeting");
+    Animator animator;    
     Coroutine corutine;
 
     private void Awake()
@@ -23,6 +23,9 @@ public class Greeting : MonoBehaviour
     IEnumerator LookAtPlayer(Transform player)
     {
         Vector3 dir = player.position - transform.position;
+        Vector3 crossProduct = Vector3.Cross(transform.forward, dir);
+        float dotProduct = Vector3.Dot(crossProduct, Vector3.up);
+        animator.SetTrigger(dotProduct > 0 ? hashRight : hashLeft);
 
         while (Vector3.Angle(transform.forward, dir) >= 5f)
         {
