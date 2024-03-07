@@ -4,7 +4,7 @@ using System.Threading;
 using UnityEngine;
 using static AnimationHashes;
 
-public class GreetingPlayer : MonoBehaviour
+public class SimpleNPC : NPCBase
 {
     Animator animator;    
     Coroutine corutine;
@@ -14,7 +14,7 @@ public class GreetingPlayer : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void StartGreetingCo(Transform player)
+    public override void GreetingPlayer(Transform player)
     {
         if(corutine == null)
             corutine = StartCoroutine(LookAtPlayer(player));
